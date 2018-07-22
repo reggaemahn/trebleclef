@@ -1,0 +1,19 @@
+html, body{
+    background: #f5f5f5 !important;
+}
+
+.main-nav{
+    box-shadow: 0 0 10px #ccc;
+}
+
+.search-bar{
+    margin: 20px auto 20px auto;
+}
+
+.search-result-item{
+    width: 320px;
+    margin: 15px;
+    height: 165px;
+    display: inline-block;
+    overflow: hidden;
+}

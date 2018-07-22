@@ -1,2 +1,4 @@
-# trebleclef
-A simple podcast player built with Rech
+## **WIP**
+
+# TrebleClef
+A simple podcast player built with React
