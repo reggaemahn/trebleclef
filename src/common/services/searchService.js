@@ -9,16 +9,19 @@ export default class SearchService{
     }
 
     async findPodcastEpisodes(){
-        const search = await axios.get(`${ AppSettings.ITUNES_URL } ${ this.searchTerm }`);
+        const search = await axios.get(`${ AppSettings.ITUNES_URL } ${ this.searchTerm }`, 
+        {
+            headers: {"Access-Control-Allow-Origin": "*"}
+        });
         const results = await search.data;
 
-        const test = results.results.map((episode) => ({
+        const formattedResults = results.results.map((episode) => ({
             name: episode.collectionName,
             description: '',
             thumbnailUrl: episode.artworkUrl100,
             artist: episode.artistName
         }));
 
-        return test;
+        return formattedResults;
     }
 }
