@@ -28,7 +28,7 @@ class SearchBar extends React.Component {
                                 </span>
                             </div>
                             <div className="control is-large">
-                                <a className={`button is-info is-large is-rounded ${this.state.isLoading ? 'is-loading' : ''}`}>Find Podcasts</a>
+                                <a className={`button is-info is-large is-rounded ${this.state.isLoading ? 'is-loading' : ''}`}>Go</a>
                             </div>
                         </div>
                     </form>
