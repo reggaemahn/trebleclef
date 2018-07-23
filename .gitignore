@@ -62,3 +62,6 @@ typings/
 
 # css files
 *.css
+
+# build directory
+build/
