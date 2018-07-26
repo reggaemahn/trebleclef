@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import logo from '../logo.png';
 
 class Navbar extends Component {
@@ -21,10 +22,10 @@ class Navbar extends Component {
             <nav className="navbar main-nav" >
                 <div className="container">
                     <div className="navbar-brand">
-                        <a className="navbar-item" href="/">
+                        <Link className="navbar-item"  to={'/'}>
                             <img src={logo} alt="logo" height="28" />
                             <span className="is-size-4">trebleclef</span>
-                        </a>
+                        </Link>
                         <span onClick={this.toggleHamburger} className={`navbar-burger burger ${ this.state.isHamburgerActive ? 'is-active' : '' }`} data-target="navbarMenuHeroA">
                             <span></span>
                             <span></span>
