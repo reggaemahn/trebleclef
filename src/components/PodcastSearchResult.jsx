@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-class PodcastEpisode extends React.Component {
+class PodcastSearchResult extends React.Component {
     constructor(props) {
         super(props);
 
@@ -35,4 +35,4 @@ class PodcastEpisode extends React.Component {
     }
 }
 
-export default PodcastEpisode;
+export default PodcastSearchResult;
