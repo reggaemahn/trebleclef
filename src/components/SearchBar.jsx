@@ -1,16 +1,20 @@
 import * as React from 'react';
-import SearchService from '../common/services/searchService';
 
 class SearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchTerm: '',
-            isLoading: false
+            searchTerm: this.props.searchTerm
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            searchTerm: nextProps.searchTerm
+        });
     }
 
     render() {
@@ -28,7 +32,7 @@ class SearchBar extends React.Component {
                                 </span>
                             </div>
                             <div className="control is-large">
-                                <a className={`button is-info is-large is-rounded ${this.state.isLoading ? 'is-loading' : ''}`}>Go</a>
+                                <a className="button is-info is-large is-rounded">Go</a>
                             </div>
                         </div>
                     </form>
@@ -39,20 +43,10 @@ class SearchBar extends React.Component {
         );
     }
 
-    async handleSubmit(event) {
+    handleSubmit(event) {
         event.preventDefault();
 
-        this.setState({ isLoading: true });
-        
-        const results = await new SearchService(this.state.searchTerm)
-            .findPodcastEpisodes();
-
-        this.setState({
-            isLoading: false,
-            searchTerm: ''
-        });
-
-        this.props.handleSubmit(results);
+        this.props.onSearch(this.state.searchTerm);
     }
 
     handleChange(event) {

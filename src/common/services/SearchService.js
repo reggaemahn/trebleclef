@@ -1,15 +1,15 @@
 import axios  from 'axios';
-import * as AppSettings from '../appSettings';
+import * as AppSettings from '../AppSettings';
 
-export default class SearchService{
-    searchTerm  = '';
-
+export class SearchService{
     constructor(searchTerm) {
         this.searchTerm = searchTerm;
     }
 
     async findPodcastEpisodes(){
-        const search = await axios.get(`${ AppSettings.ITUNES_URL } ${ this.searchTerm }`, 
+        console.log(`Searching for '${ this.searchTerm }'`);
+        const uri = encodeURI(`${ AppSettings.ITUNES_URL } ${ this.searchTerm }`);
+        const search = await axios.get(uri, 
         {
             headers: {"Access-Control-Allow-Origin": "*"}
         });
