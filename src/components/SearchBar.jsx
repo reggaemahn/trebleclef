@@ -4,17 +4,11 @@ class SearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchTerm: this.props.searchTerm
+            searchTerm: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            searchTerm: nextProps.searchTerm
-        });
     }
 
     render() {
@@ -45,7 +39,6 @@ class SearchBar extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
         this.props.onSearch(this.state.searchTerm);
     }
 

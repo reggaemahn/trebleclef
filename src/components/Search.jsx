@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import PodcastEpisode from '../components/PodcastEpisode';
 import { UrlHelpers } from '../common/libs/UrlHelpers';
 import { SearchService } from '../common/services/SearchService';
 
-class App extends Component {
+import SearchResults from './SearchResults';
+import SearchBar from './SearchBar';
+
+class Search extends Component {
 
     constructor(props) {
         super(props);
@@ -40,20 +42,21 @@ class App extends Component {
         }
     }
 
-    render() {
-        let episodes = this.state.searchResults.map((result, index) => {
-            return <PodcastEpisode key={index} data={result} />
-        });
+    goToSearchPage = (searchTerm) => {
+        if (searchTerm !== this.state.searchTerm) {
+            console.log(`Navigating from ${this.state.searchTerm} to ${ searchTerm }`);
+            this.props.history.push(`/search?query=${searchTerm}`);
+        }
+    }
 
+    render() {
         return (
-            <div className="container">
-                <h1 className="is-size-4">Results</h1>
-                <div className="search-results">
-                    {episodes}
-                </div>
+            <div>
+                <SearchBar onSearch={this.goToSearchPage} />
+                <SearchResults searchResults={this.state.searchResults} />
             </div>
         );
     }
 }
 
-export default App;
+export default Search;

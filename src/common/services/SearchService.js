@@ -7,7 +7,6 @@ export class SearchService{
     }
 
     async findPodcastEpisodes(){
-        console.log(`Searching for '${ this.searchTerm }'`);
         const uri = encodeURI(`${ AppSettings.ITUNES_URL } ${ this.searchTerm }`);
         const search = await axios.get(uri, 
         {
@@ -16,6 +15,7 @@ export class SearchService{
         const results = await search.data;
 
         const formattedResults = results.results.map((episode) => ({
+            trackId: episode.trackId,
             name: episode.collectionName,
             description: '',
             thumbnailUrl: episode.artworkUrl100,
