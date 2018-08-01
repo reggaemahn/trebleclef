@@ -1,0 +1,27 @@
+html, body {
+  background: #f5f5f5 !important; }
+
+.main-nav {
+  box-shadow: 0 0 10px #ccc; }
+
+.search-bar {
+  margin: 20px auto 20px auto; }
+
+.search-results {
+  text-align: center; }
+
+.search-result-item {
+  width: 320px;
+  margin: 15px;
+  height: 165px;
+  display: inline-block;
+  overflow: hidden; }
+
+.audio-control {
+  width: calc(100% - 60px);
+  margin: 10px 30px 0px 30px;
+  height: 50px; }
+
+.podcast-loader {
+  text-align: center;
+  margin: 50px 0; }
