@@ -21,3 +21,14 @@ html, body{
     display: inline-block;
     overflow: hidden;
 }
+
+.audio-control{
+    width: calc(100% - 60px);
+    margin: 10px 30px 0px 30px;
+    height: 50px;
+}
+
+.podcast-loader{
+    text-align: center;
+    margin: 50px 0;
+}

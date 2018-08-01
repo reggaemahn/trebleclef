@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PodcastSearchResult from './PodcastSearchResult';
 
 const SearchResults = (props) => {
-    let episodes = props.searchResults.map((result, index) => {
+    let episodes = props.searchResults.map((result) => {
         return <PodcastSearchResult key={result.trackId} data={result} />
     });
 

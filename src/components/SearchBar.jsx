@@ -4,7 +4,7 @@ class SearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchTerm: ''
+            searchTerm: this.props.searchTerm
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,7 +26,7 @@ class SearchBar extends React.Component {
                                 </span>
                             </div>
                             <div className="control is-large">
-                                <a className="button is-info is-large is-rounded">Go</a>
+                                <a className={`button is-info is-large is-rounded ${ this.props.loadingAnim ? 'is-loading' : '' }`}>Go</a>
                             </div>
                         </div>
                     </form>

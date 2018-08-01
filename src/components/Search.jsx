@@ -10,41 +10,46 @@ class Search extends Component {
     constructor(props) {
         super(props);
 
-        const query = new UrlHelpers().getUrlParameter('query');
+        const query = new UrlHelpers()
+            .getUrlParameter('query');
         this.state = {
             searchResults: [],
-            searchTerm: query
+            searchTerm: query,
+            loadingAnim: false
         }
     }
 
     async componentDidMount() {
-        const initialSearch = await new SearchService(this.state.searchTerm)
-            .findPodcastEpisodes();
+        this.setState({ loadingAnim: true });
+        const initialSearch = await new SearchService()
+            .findPodcasts(this.state.searchTerm);
 
         this.setState({
-            searchResults: initialSearch
+            searchResults: initialSearch,
+            loadingAnim: false
         });
     }
 
     async componentWillReceiveProps() {
-        const newQuery = new UrlHelpers().getUrlParameter('query');
+        const newQuery = new UrlHelpers()
+            .getUrlParameter('query');
 
         if (this.state.searchTerm !== newQuery) {
-            console.log(`previous: ${this.state.searchTerm} | new: ${newQuery}`);
+            this.setState({ loadingAnim: true });
 
-            const updatedSearch = await new SearchService(newQuery)
-                .findPodcastEpisodes();
+            const updatedSearch = await new SearchService()
+                .findPodcasts(newQuery);
 
             this.setState({
                 searchResults: updatedSearch,
-                searchTerm: newQuery
+                searchTerm: newQuery,
+                loadingAnim: false
             });
         }
     }
 
     goToSearchPage = (searchTerm) => {
         if (searchTerm !== this.state.searchTerm) {
-            console.log(`Navigating from ${this.state.searchTerm} to ${ searchTerm }`);
             this.props.history.push(`/search?query=${searchTerm}`);
         }
     }
@@ -52,7 +57,7 @@ class Search extends Component {
     render() {
         return (
             <div>
-                <SearchBar onSearch={this.goToSearchPage} />
+                <SearchBar searchTerm={this.state.searchTerm} loadingAnim={this.state.loadingAnim} onSearch={this.goToSearchPage} />
                 <SearchResults searchResults={this.state.searchResults} />
             </div>
         );

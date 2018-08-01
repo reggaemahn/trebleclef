@@ -6,6 +6,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Search from './components/Search';
 import Home from './components/Home';
+import Podcast from './components/Podcast';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
 
           <Route exact path='/' component={Home} />
           <Route exact path='/search' component={Search} />
+          <Route path='/podcast/:id' component={Podcast} />
         </div>
       </BrowserRouter>
     );
