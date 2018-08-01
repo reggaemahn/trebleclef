@@ -36,7 +36,7 @@ class Navbar extends Component {
                         <div className="navbar-end">
                             {/* <a className="navbar-item is-active">Home</a> */}
                             <span className="navbar-item">
-                                <a className="button" href="https://github.com/josejeevan/trebleclef" target="_blank">
+                                <a className="button" href="https://github.com/josejeevan/trebleclef" target="_blank" rel="noopener noreferrer">
                                     <span className="icon">
                                         <i className="fab fa-github"></i>
                                     </span>

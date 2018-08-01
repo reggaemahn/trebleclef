@@ -46,27 +46,26 @@ export class SearchService {
 
         var parser = new DOMParser();
         var doc = parser.parseFromString(podcastFeedXml, 'application/xml');
-        console.log(doc);
         const episodeNodes = doc.querySelectorAll('rss > channel > item');
 
-        const episodes = [];
-
-        [...episodeNodes].map(episodeNode => {
+        const episodes = [...episodeNodes].map(episodeNode => {
             const title = episodeNode.querySelector('title');
             const pubDate = episodeNode.querySelector('pubDate');
             const description = episodeNode.querySelector('description');
             const audioUrl = episodeNode.querySelector('enclosure');
             const audioFormat = episodeNode.querySelector('enclosure');
 
-            if(audioUrl && audioFormat){
-                episodes.push({
+            if (audioUrl && audioFormat) {
+                return {
                     title: title === null ? ' ' : title.textContent,
-                    pubDate: pubDate  === null ? ' ' : pubDate.textContent,
-                    description: description  === null ? ' ' : description.innerText,
+                    pubDate: pubDate === null ? ' ' : pubDate.textContent,
+                    description: description === null ? ' ' : description.innerText,
                     audioUrl: audioUrl.getAttribute('url'),
                     audioFormat: audioFormat.getAttribute('type')
-                });
+                };
             }
+
+            return {};
         });
 
         return {

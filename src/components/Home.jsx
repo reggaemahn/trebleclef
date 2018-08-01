@@ -4,10 +4,6 @@ import SearchBar from '../components/SearchBar';
 
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onSearch = (query) => {
     this.props.history.push(`/search?query=${query}`);
   }
