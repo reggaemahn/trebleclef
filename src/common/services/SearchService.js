@@ -1,5 +1,4 @@
 import * as AppSettings from '../AppSettings';
-import * as XmlJs from 'xml-js';
 
 export class SearchService {
 

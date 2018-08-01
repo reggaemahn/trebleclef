@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { UrlHelpers } from '../common/libs/UrlHelpers';
+import UrlHelpers from '../common/libs/UrlHelpers';
 import { SearchService } from '../common/services/SearchService';
 
 import SearchResults from './SearchResults';

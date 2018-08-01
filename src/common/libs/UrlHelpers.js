@@ -1,4 +1,4 @@
-export class UrlHelpers{
+export default class UrlHelpers{
 
     getUrlParameter (name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
