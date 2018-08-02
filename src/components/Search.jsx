@@ -12,22 +12,18 @@ class Search extends Component {
 
         const query = new UrlHelpers()
             .getUrlParameter('query');
+
         this.state = {
             searchResults: [],
             searchTerm: query,
             loadingAnim: false
         }
+
+        this.updateSearchResults = this.updateSearchResults.bind(this);
     }
 
     async componentDidMount() {
-        this.setState({ loadingAnim: true });
-        const initialSearch = await new SearchService()
-            .findPodcasts(this.state.searchTerm);
-
-        this.setState({
-            searchResults: initialSearch,
-            loadingAnim: false
-        });
+        this.updateSearchResults(this.state.searchTerm);
     }
 
     async componentWillReceiveProps() {
@@ -35,16 +31,29 @@ class Search extends Component {
             .getUrlParameter('query');
 
         if (this.state.searchTerm !== newQuery) {
-            this.setState({ loadingAnim: true });
+            this.updateSearchResults(newQuery);
+        }
+    }
 
-            const updatedSearch = await new SearchService()
-                .findPodcasts(newQuery);
+    async updateSearchResults(searchTerm) {
+        this.setState({ loadingAnim: true });
+
+        try {
+            const searchResults = await new SearchService()
+                .findPodcasts(searchTerm);
 
             this.setState({
-                searchResults: updatedSearch,
-                searchTerm: newQuery,
+                searchResults: searchResults,
+                searchTerm: searchTerm,
                 loadingAnim: false
             });
+        } catch (err) {
+            this.setState({
+                searchTerm: searchTerm,
+                loadingAnim: false
+            });
+
+            this.props.onError();
         }
     }
 

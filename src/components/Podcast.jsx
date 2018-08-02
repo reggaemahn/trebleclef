@@ -25,21 +25,25 @@ class Podcast extends Component {
 
         const podcastId = this.props.match.params.id;
 
-        // const searchService = new SearchService()
-        // const podcast = await searchService
-        //     .findPodcast(podcastId);
+        try {
+            const podcastDetails = await new SearchService()
+                .getPodcastDetails(podcastId);
 
-        const podcastDetails = await new SearchService()
-            .getPodcastDetails(podcastId);
+            this.setState({
+                showLoader: false,
+                title: podcastDetails.title,
+                description: podcastDetails.description,
+                imageUrl: podcastDetails.imageUrl,
+                author: podcastDetails.artist,
+                episodes: podcastDetails.episodes
+            });
+        } catch (err) {
+            this.setState({
+                showLoader: false
+            });
 
-        this.setState({
-            showLoader: false,
-            title: podcastDetails.title,
-            description: podcastDetails.description,
-            imageUrl: podcastDetails.imageUrl,
-            author: podcastDetails.artist,
-            episodes: podcastDetails.episodes
-        });
+            this.props.onError();
+        }
     }
 
     render() {
@@ -56,7 +60,7 @@ class Podcast extends Component {
                     description={this.state.description}
                     imageUrl={this.state.imageUrl}
                     author={this.state.author} />
-                    
+
                 {episodes}
             </div>
         );

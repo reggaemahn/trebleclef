@@ -41,9 +41,9 @@ class App extends Component {
           <ErrorBanner hideError={this.hideError} isErrorState={this.state.showErrorBanner} />
           <Navbar />
 
-          <Route exact path='/' onError={this.onError}  component={Home} />
-          <Route exact path='/search' onError={this.onError} component={Search} />
-          <Route path='/podcast/:id' onError={this.onError}  component={Podcast} />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/search' render={(props) => <Search {...props} onError={this.onError} />} />
+          <Route path='/podcast/:id' render={(props) => <Podcast {...props} onError={this.onError} />} />
         </div>
       </BrowserRouter>
     );
