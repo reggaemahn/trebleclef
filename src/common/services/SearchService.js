@@ -1,5 +1,7 @@
 import * as AppSettings from '../AppSettings';
 
+import DateHelpers from '../libs/DateHelpers';
+
 export class SearchService {
 
     async findPodcasts(searchTerm) {
@@ -44,11 +46,33 @@ export class SearchService {
             })
         })).text();
 
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(podcastFeedXml, 'application/xml');
-        const episodeNodes = doc.querySelectorAll('rss > channel > item');
+        var doc = new DOMParser()
+            .parseFromString(podcastFeedXml, 'application/xml');
 
-        const episodes = [...episodeNodes].map(episodeNode => {
+        const channelNode = doc
+            .querySelector('rss > channel');
+
+        const imageNode = channelNode
+            .getElementsByTagNameNS(AppSettings.ITUNES_XMLNAMESPACE, 'image')[0];
+
+        const authorNode = channelNode
+            .getElementsByTagNameNS(AppSettings.ITUNES_XMLNAMESPACE, 'owner')[0];
+
+        console.log(authorNode.childElementCount);
+
+        return {
+            title: doc.querySelector('rss > channel > title').textContent,
+            description: doc.querySelector('rss > channel > description').textContent,
+            imageUrl: imageNode.getAttribute('href'),
+            author: authorNode.childElementCount === 1 ? authorNode.textContent : authorNode.getElementsByTagNameNS(AppSettings.ITUNES_XMLNAMESPACE, 'name')[0].textContent,
+            episodes: this.getEpisodesFromXml(doc)
+        };
+    }
+
+    getEpisodesFromXml(xmlDoc) {
+        const episodeNodes = xmlDoc.querySelectorAll('rss > channel > item');
+
+        return [...episodeNodes].map(episodeNode => {
             const title = episodeNode.querySelector('title');
             const pubDate = episodeNode.querySelector('pubDate');
             const description = episodeNode.querySelector('description');
@@ -58,8 +82,8 @@ export class SearchService {
             if (audioUrl && audioFormat) {
                 return {
                     title: title === null ? ' ' : title.textContent,
-                    pubDate: pubDate === null ? ' ' : pubDate.textContent,
-                    description: description === null ? ' ' : description.innerText,
+                    pubDate: new DateHelpers().getFriendlyItunesDate(pubDate.textContent),
+                    description: description === null ? ' ' : description.textContent,
                     audioUrl: audioUrl.getAttribute('url'),
                     audioFormat: audioFormat.getAttribute('type')
                 };
@@ -67,13 +91,5 @@ export class SearchService {
 
             return {};
         });
-
-        return {
-            title: doc.querySelector('rss > channel > title').textContent,
-            description: doc.querySelector('rss > channel > description').textContent,
-            imageUrl: doc.querySelector('rss > channel > image > url').textContent,
-            author: '',
-            episodes: episodes
-        };
     }
 }
