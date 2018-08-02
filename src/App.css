@@ -28,3 +28,6 @@ html, body {
 
 .notification {
   border-radius: 0; }
+
+.podcast-episode-description {
+  margin: 15px 0; }
