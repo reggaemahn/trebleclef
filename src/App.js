@@ -36,7 +36,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename='/trebleclef'>
         <div>
           <ErrorBanner hideError={this.hideError} isErrorState={this.state.showErrorBanner} />
           <Navbar />
