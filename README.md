@@ -11,6 +11,11 @@ The app is deployed to https://bit.ly/treble-clef to provide a working sample. T
 
 If you'd like to use this beyond demo purposes, I highly recommend you bring your own CORS proxy, which you can easily do by deploying an instance of cors-anywhere to heroku.
 
+## Browser Support
+The app uses `fetch` and will only work in [browsers that support this feature](https://caniuse.com/#search=fetch). To run it in other browsers, you can use a [polyfill](https://github.com/github/fetch).
+
+## Setup
+Running and testing the application
 
 ### To run the tests
 `cd` into the root directory and run `yarn test`
