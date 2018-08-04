@@ -4,7 +4,8 @@ class SearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchTerm: this.props.searchTerm
+            searchTerm: this.props.searchTerm,
+            showError: false
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,9 +27,11 @@ class SearchBar extends React.Component {
                                 </span>
                             </div>
                             <div className="control is-large">
-                                <button type="submit" className={`button is-info is-large is-rounded ${ this.props.loadingAnim ? 'is-loading' : '' }`}>Go</button>
+                                <button type="submit" className={`button is-info is-large is-rounded ${this.props.loadingAnim ? 'is-loading' : ''}`}>Go</button>
                             </div>
+
                         </div>
+                        <div className={`${this.state.showError ? '' : 'is-hidden'}`}><p class="help is-danger">Enter the podcast name you'd like to find</p></div>
                     </form>
                 </div>
 
@@ -39,6 +42,20 @@ class SearchBar extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const term = this.state.searchTerm;
+        if (!term || term.length < 1) {
+            this.setState({
+                showError: true
+            });
+            return;
+        }
+
+        if(this.state.showError){
+            this.setState({
+                showError: false
+            });
+        }
+
         this.props.onSearch(this.state.searchTerm);
     }
 
