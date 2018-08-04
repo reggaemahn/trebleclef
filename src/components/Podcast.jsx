@@ -62,7 +62,7 @@ class Podcast extends Component {
         if (nextPageNumber >= 0 && nextPageNumber <= this.state.pageCount) {
 
             const page = new PaginationHelper()
-                .paginate(nextPageNumber, this.state.episodes);
+                .paginate(nextPageNumber, this.state.episodes, AppSettings.SEARCH_PAGINATION_FACTOR);
 
             this.setState({
                 currentPageNum: page.currentPageNum,

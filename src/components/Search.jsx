@@ -75,14 +75,14 @@ class Search extends Component {
     }
 
     onPaginate = (nextPageNumber) => {
-        if (nextPageNumber > 0 && nextPageNumber <= this.state.pageCount) {
+        if (nextPageNumber >= 0 && nextPageNumber <= this.state.pageCount) {
 
             const page = new PaginationHelper()
-                .paginate(nextPageNumber, this.state.searchResults);
+                .paginate(nextPageNumber, this.state.searchResults, AppSettings.SEARCH_PAGINATION_FACTOR);
 
             this.setState({
-                currentPageNum: page.nextPageNumber,
-                currentPage: page.newCurrentPage
+                currentPageNum: page.currentPageNum,
+                currentPage: page.currentPage
             });
         }
     }
