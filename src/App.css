@@ -31,3 +31,7 @@ html, body {
 
 .podcast-episode-description {
   margin: 15px 0; }
+
+.search-pagination {
+  width: 90%;
+  margin: 0 auto; }
