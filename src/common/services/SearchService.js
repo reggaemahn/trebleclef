@@ -58,8 +58,6 @@ export class SearchService {
         const authorNode = channelNode
             .getElementsByTagNameNS(AppSettings.ITUNES_XMLNAMESPACE, 'owner')[0];
 
-        console.log(authorNode.childElementCount);
-
         return {
             title: doc.querySelector('rss > channel > title').textContent,
             description: doc.querySelector('rss > channel > description').textContent,

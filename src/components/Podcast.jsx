@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { SearchService } from '../common/services/SearchService';
 import GUID from '../common/libs/GUID.js';
+import PaginationHelper from '../common/libs/PaginationHelper';
+import * as AppSettings from '../common/AppSettings';
 
 import PodcastEpisode from './PodcastEpisode';
 import PodcastHeader from './PodcastHeader';
+import Pagination from './Pagination';
 
 
 class Podcast extends Component {
@@ -16,6 +19,9 @@ class Podcast extends Component {
             description: '',
             imageUrl: '',
             author: '',
+            currentPageNum: 0,
+            pageCount: 0,
+            currentPage: [],
             episodes: []
         }
     }
@@ -29,13 +35,19 @@ class Podcast extends Component {
             const podcastDetails = await new SearchService()
                 .getPodcastDetails(podcastId);
 
+            const pageCount = Math.ceil(podcastDetails.episodes.length / AppSettings.SEARCH_PAGINATION_FACTOR);
+            const currentPageEnd = pageCount > AppSettings.SEARCH_PAGINATION_FACTOR ? AppSettings.SEARCH_PAGINATION_FACTOR : pageCount;
+
             this.setState({
                 showLoader: false,
                 title: podcastDetails.title,
                 description: podcastDetails.description,
                 imageUrl: podcastDetails.imageUrl,
                 author: podcastDetails.artist,
-                episodes: podcastDetails.episodes
+                episodes: podcastDetails.episodes,
+                pageCount: pageCount,
+                currentPageNum: 1,
+                currentPage: [...podcastDetails.episodes].splice(0, currentPageEnd)
             });
         } catch (err) {
             this.setState({
@@ -46,8 +58,21 @@ class Podcast extends Component {
         }
     }
 
+    onPaginate = (nextPageNumber) => {
+        if (nextPageNumber >= 0 && nextPageNumber <= this.state.pageCount) {
+
+            const page = new PaginationHelper()
+                .paginate(nextPageNumber, this.state.episodes);
+
+            this.setState({
+                currentPageNum: page.currentPageNum,
+                currentPage: page.currentPage
+            });
+        }
+    }
+
     render() {
-        let episodes = this.state.episodes.map((episode) => {
+        let episodes = this.state.currentPage.map((episode) => {
             var id = new GUID().getGUID();
             return <PodcastEpisode key={id} data={episode} />
         });
@@ -62,6 +87,11 @@ class Podcast extends Component {
                     author={this.state.author} />
 
                 {episodes}
+
+                <Pagination
+                    onPaginate={this.onPaginate}
+                    currentPageNum={this.state.currentPageNum}
+                    pageCount={this.state.pageCount} />
             </div>
         );
     }

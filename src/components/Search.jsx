@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UrlHelpers from '../common/libs/UrlHelpers';
 import { SearchService } from '../common/services/SearchService';
+import PaginationHelper from '../common/libs/PaginationHelper';
 import * as AppSettings from '../common/AppSettings';
 
 import SearchResults from './SearchResults';
@@ -74,23 +75,14 @@ class Search extends Component {
     }
 
     onPaginate = (nextPageNumber) => {
-        console.log(nextPageNumber);
+        if (nextPageNumber > 0 && nextPageNumber <= this.state.pageCount) {
 
-        if(nextPageNumber >= 0 && nextPageNumber <= this.state.pageCount){
-
-            const start = AppSettings.SEARCH_PAGINATION_FACTOR * nextPageNumber;
-            let end = start + AppSettings.SEARCH_PAGINATION_FACTOR;
-
-            // To ensure array index doesn't overflow
-            if(end > this.state.searchResults.length){
-                end = this.state.searchResults.length;
-            }
-
-            const newCurrentPage = this.state.searchResults.slice(start, end);
+            const page = new PaginationHelper()
+                .paginate(nextPageNumber, this.state.searchResults);
 
             this.setState({
-                currentPageNum: nextPageNumber,
-                currentPage: newCurrentPage
+                currentPageNum: page.nextPageNumber,
+                currentPage: page.newCurrentPage
             });
         }
     }
