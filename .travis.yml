@@ -1,11 +1,17 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
-    - node_modules
+  - node_modules
 script:
-  - npm test
-  - npm run build
-on:
+- npm test
+- npm run build
+true:
   branch: master
+deploy:
+  provider: heroku
+  app: treble-clef
+  api_key: $HEROKU_API_KEY
+  on:
+    branch: master
