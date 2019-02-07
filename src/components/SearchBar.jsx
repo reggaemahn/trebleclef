@@ -31,7 +31,7 @@ class SearchBar extends React.Component {
                             </div>
 
                         </div>
-                        <div className={`${this.state.showError ? '' : 'is-hidden'}`}><p class="help is-danger">Enter the podcast name you'd like to find</p></div>
+                        <div className={`${this.state.showError ? '' : 'is-hidden'}`}><p className="help is-danger">Enter the podcast name you'd like to find</p></div>
                     </form>
                 </div>
 
