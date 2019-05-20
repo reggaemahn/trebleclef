@@ -7,7 +7,7 @@ const PodcastEpisode = (props) => {
             <p>{props.data.pubDate}</p>
             <div className="podcast-episode-description" dangerouslySetInnerHTML={{ __html: props.data.description }}></div>
             <div>
-            <audio controls className="audio-control">
+            <audio controls className="audio-control" preload="none">
                 <source src={props.data.audioUrl} type='audio/mpeg' />
             </audio>
             </div>
