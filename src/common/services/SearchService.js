@@ -42,6 +42,9 @@ export class SearchService {
         const uri = encodeURI(AppSettings.CORS_URL + podcast.feedUrl);
         const podcastFeedXml = await (await fetch(uri, {
             headers: new Headers({
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/rss+xml',
+                'ReferrerPolicy': 'no-referrer',
                 'Content-Type': 'application/rss+xml'
             })
         })).text();
