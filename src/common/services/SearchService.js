@@ -39,7 +39,7 @@ export class SearchService {
     async getPodcastDetails(podcastId) {
         const podcast = await this.findPodcast(podcastId);
 
-        const uri = encodeURI(AppSettings.CORS_URL + podcast.feedUrl);
+        const uri = encodeURI(AppSettings.CORS_URL + podcast.feedUrl + '?format=xml');
         const podcastFeedXml = await (await fetch(uri, {
             headers: new Headers({
                 'X-Requested-With': 'XMLHttpRequest',
