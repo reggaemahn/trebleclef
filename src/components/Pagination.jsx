@@ -12,7 +12,7 @@ const Pagination = (props) => {
                 </li>
 
                 <li>
-                    <a className="pagination-link is-current" aria-label="Page 3" aria-current="page">{`${props.currentPageNum} of ${props.pageCount}`}</a>
+                    <a className="pagination-link is-current" aria-label={ `Page ${props.currentPageNum}` } aria-current={`${props.currentPageNum}` }>{`${props.currentPageNum} of ${props.pageCount}`}</a>
                 </li>
 
                 <li onClick={() => { props.onPaginate(props.currentPageNum + 1) }} className={isLast ? 'is-hidden' : ''}>
