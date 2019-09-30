@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/josejeevan/trebleclef.svg?branch=master)](https://travis-ci.org/josejeevan/trebleclef)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1c6a44e6-91d1-4496-851f-3d0450166d7e/deploy-status)](https://app.netlify.com/sites/trebleclef/deploys)
+[![Build Status](https://travis-ci.org/josejeevan/trebleclef.svg?branch=master)](https://travis-ci.org/josejeevan/trebleclef)  [![Netlify Status](https://api.netlify.com/api/v1/badges/1c6a44e6-91d1-4496-851f-3d0450166d7e/deploy-status)](https://app.netlify.com/sites/trebleclef/deploys)
 
 # TrebleClef
 A simple podcast player built with React
