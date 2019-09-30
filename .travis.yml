@@ -6,12 +6,6 @@ cache:
   - node_modules
 script:
 - npm test
-- npm run build
+- curl -X POST -d {} https://api.netlify.com/build_hooks/$NETLIFY_HOOK_ID
 true:
   branch: master
-deploy:
-  provider: heroku
-  app: treble-clef
-  api_key: $HEROKU_API_KEY
-  on:
-    branch: master
