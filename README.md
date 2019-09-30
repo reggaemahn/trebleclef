@@ -28,3 +28,7 @@ Running and testing the application
 `cd` into the root directory and run `yarn run start-dev`
 
 This will build the project and make it available at http://localhost:3000/
+
+
+## Credits
+Loading animation from [here](https://dribbble.com/shots/4632455-Loading-Animation-Bored-Hand)

@@ -62,3 +62,6 @@ typings/
 
 # build directory
 build/
+
+# system files
+.DS_Store

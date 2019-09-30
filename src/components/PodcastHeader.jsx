@@ -14,7 +14,7 @@ const PodcastHeader = (props) => {
                 </div>
             </div>
             <div className={`podcast-loader ${props.showLoader ? '' : 'is-hidden'}`}>
-                <img src={loading} alt="loading" width="75px" height="75px" />
+                <img src={loading} alt="loading" width="25%" />
             </div>
         </div>
     );
