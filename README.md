@@ -4,7 +4,7 @@
 A simple podcast player built with React
 
 ## Things to note
-The app is deployed to [heroku](https://treble-clef.herokuapp.com/) to provide a working sample. The demo app is not meant to be used for heavy usage because this project uses:
+The app is deployed to [netlify](https://trebleclef.netlify.com/) to provide a working sample. The demo app is not meant to be used for heavy usage because this project uses:
 - the iTunes search api, which is rate limited to roughly 20 requests per minute
 - the [cors-anywhere](https://github.com/Rob--W/cors-anywhere#readme) proxy which is also a similar demo instance
 - the heroku instance which is a free dyno and sleeps every 30 minutes, so first load might take 7-10 seconds at times.
