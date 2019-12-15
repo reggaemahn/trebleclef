@@ -60,7 +60,8 @@ class PodcastEpisode extends React.Component{
             <div className="box">
                 <p className="is-size-5">
                     <b>{this.state.title}</b>
-                    <span className="icon pointer" onClick={() => this.downloadEpisode(this.state.uniqueId)}>
+
+                    <span className="icon pointer is-pulled-right is-size-5" onClick={() => this.downloadEpisode(this.state.uniqueId)}>
                         <i className="fas fa-download"></i>
                     </span>    
                 </p>
