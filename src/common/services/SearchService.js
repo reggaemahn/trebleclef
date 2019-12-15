@@ -1,6 +1,7 @@
 import * as AppSettings from '../AppSettings';
 
 import DateHelpers from '../libs/DateHelpers';
+import GUID from "../../common/libs/GUID.js";
 
 export class SearchService {
 
@@ -82,6 +83,7 @@ export class SearchService {
 
             if (audioUrl && audioFormat) {
                 return {
+                    uniqueId: new GUID().getGUID(),
                     title: title === null ? ' ' : title.textContent,
                     pubDate: new DateHelpers().getFriendlyItunesDate(pubDate.textContent),
                     description: description === null ? ' ' : description.textContent,

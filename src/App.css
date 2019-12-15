@@ -36,6 +36,5 @@ html, body {
   width: 90%;
   margin: 0 auto; }
 
-.pagination-link{
-  padding: 5px 20px;
-}
+.pointer {
+  cursor: pointer; }
