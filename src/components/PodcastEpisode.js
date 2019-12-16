@@ -38,20 +38,26 @@ class PodcastEpisode extends React.Component{
         const updateProgressBar = this.updateProgressBar;
         const setProgressBarState = this.setProgressBarState;
 
-        new Downloader({ 
+        const download = new Downloader({ 
             url: new UrlHelpers().getCorsifiedUrl(this.state.audioUrl),
             filename: `${this.state.title}.mp3`,
+            forceDesktopMode: true,
+            autoStart: false,
+            timeout: 9999999,
             process: function(event){
                 if (!event.lengthComputable) return; 
                 updateProgressBar(Math.floor(event.loaded / event.total * 100));
             }
-          })
-          .then(function () {
-            setProgressBarState('is-success');
-          })
-          .catch(function (error) {
-            setProgressBarState('is-danger');
           });
+        
+          try{
+              await download.start;
+              setProgressBarState('is-success');
+          }
+          catch(error){
+            console.log(error);
+            setProgressBarState('is-danger');
+          }
 
     }
 

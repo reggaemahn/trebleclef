@@ -116,11 +116,13 @@ class Podcast extends Component {
         const downloads = [];
         episodes.map(function(episode){
             if(typeof episode.audioUrl !== 'undefined'){
-                console.log('downloading ' + episode.title);
                 downloads.push(
                     new Downloader({ 
                         url: new UrlHelpers().getCorsifiedUrl(episode.audioUrl),
-                        filename: `${episode.title}.mp3`
+                        filename: `${episode.title}.mp3`,
+                        autoStart: true,
+                        forceDesktopMode: true,
+                        timeout: 999999
                     })
                 );
             }

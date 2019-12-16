@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "bulma": "^0.8.0",
-    "js-file-downloader": "^1.1.4",
+    "js-file-downloader": "git://github.com/reggaemahn/js-file-downloader.git#f6307d02a313a35464abeb27cc10fb28bedf93c0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
