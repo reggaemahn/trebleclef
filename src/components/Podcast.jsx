@@ -108,18 +108,24 @@ class Podcast extends Component {
         }
 
         for(var x=0; x<downloadQueue.length; x++){
-            await this.downloadQueue(downloadQueue[x]);
+            await this.downloadQueue(downloadQueue[x], x*AppSettings.MAX_PARALLEL_DOWNLOADS);
         }
     };
 
-    downloadQueue = async (episodes) => {
+    downloadQueue = async (episodes, startIndex) => {
+
+        let numDigits = this.state.episodes.length.toString().length;
+
         const downloads = [];
-        episodes.map(function(episode){
-            if(typeof episode.audioUrl !== 'undefined'){
+
+        for(let i=0; i<episodes.length; i++){
+            const fileName = `${startIndex.toString().padStart(numDigits, 0)}-${episodes[i].title}.mp3`;
+
+            if(typeof episodes[i].audioUrl !== 'undefined'){
                 downloads.push(
                     new Downloader({ 
-                        url: new UrlHelpers().getCorsifiedUrl(episode.audioUrl),
-                        filename: `${episode.title}.mp3`,
+                        url: new UrlHelpers().getCorsifiedUrl(episodes[i].audioUrl),
+                        filename: fileName,
                         autoStart: true,
                         forceDesktopMode: true,
                         timeout: 999999
@@ -128,12 +134,17 @@ class Podcast extends Component {
             }
             else{
                 console.log('Failed to download episode:');
-                console.log(episode);
+                console.log(episodes[i]);
             }
-        });
+            startIndex++;
+        }
 
         await Promise.all(downloads).catch(error => console.log(error));
         this.setState({downloadPercentage: this.state.downloadPercentage + episodes.length});
+    }
+
+    getIndexedEpisodeTitle(name){
+
     }
 
     render() {
