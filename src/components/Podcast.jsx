@@ -165,6 +165,7 @@ class Podcast extends Component {
                     downloadPercentage={this.state.downloadPercentage}
                     progressBarState={this.state.progressBarState}
                     downloadAllEpisodes={this.downloadAllEpisodes}
+                    totalEpisodes={this.state.episodes.length}
                 />
 
                 {episodes}

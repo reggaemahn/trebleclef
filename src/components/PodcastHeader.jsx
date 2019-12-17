@@ -15,7 +15,7 @@ const PodcastHeader = (props) => {
                     <p>{props.description}</p>
                     <br />
                     
-                    <button className={"button is-primary " + `${props.showDownloadProgress ? 'is-hidden' : ''}` } onClick={() => props.downloadAllEpisodes()}>Download</button>
+                    <button className={"button is-primary " + `${props.showDownloadProgress ? 'is-hidden' : ''}` } onClick={() => props.downloadAllEpisodes()}>Download {props.totalEpisodes} episodes</button>
                     <p className={`${props.showDownloadProgress ? '' : 'is-hidden'}`}>
                         <progress className={"progress " + props.progressBarState} value={props.downloadPercentage} max={props.downloadMax}>{props.downloadPercentage}%</progress>
                     </p>
